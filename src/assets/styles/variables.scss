@@ -1,0 +1,25 @@
+$primary: #0076c0;
+$error: #d60000;
+$dark: #333333;
+$white: #ffffff;
+$light-gray: #f6f6f6;
+
+$input-focus-border: #101010;
+$input-border: #9a9a9a;
+$input-error-border: $error;
+
+$color-background: $white;
+$footer-background: $light-gray;
+$header-gradient-1: #00a9e7;
+$header-gradient-2: #005b9f;
+$color-text: $dark;
+
+$sm: 480px;
+$md: 768px;
+$lg: 1024px;
+
+// xs 320px — 480px: Mobile devices.
+// sm 481px — 768px: iPads, Tablets.
+// md 769px — 1024px: Small screens, laptops.
+// lg 1025px — 1200px: Desktops, large screens.
+// xl 1201px and more — Extra large screens, TV.
