@@ -1,26 +1,48 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/AboutView.vue";
+import LoginView from "@/views/LoginView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
+      path: "/",
+      name: "home",
+      meta: {
+        auth: false,
+        layout: "main",
+        title: ""
+      },
+      redirect: "/login"
+    },
+    {
       path: "/login",
       name: "login",
       meta: {
+        auth: false,
         layout: "main",
         title: "login to account"
       },
-      component: HomeView
+      component: LoginView
     },
     {
       path: "/todo",
       name: "todo",
       meta: {
+        auth: true,
         layout: "default",
         title: "todo list"
       },
-      component: () => import("../views/AboutView.vue")
+      component: () => import("@/views/TodoView.vue")
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "not-found",
+      meta: {
+        auth: false,
+        layout: "main",
+        title: "page not found"
+      },
+      component: () => import("@/views/404View.vue")
     }
   ]
 });

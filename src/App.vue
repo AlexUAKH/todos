@@ -1,26 +1,24 @@
 <template>
-  <!--  <Layout />-->
-  <div class="_container">
-    <BaseButton>apply now</BaseButton>
-    <BaseInput label="Name" />
-    <router-view />
-  </div>
+  <Layout />
 </template>
 
 <script setup>
-import BaseButton from "./components/base/BaseButton.vue";
-import BaseInput from "./components/base/BaseInput.vue";
-// import { useRoute } from "vue-router";
-// import { computed, defineAsyncComponent } from "vue";
-//
-// const route = useRoute();
-// const Layout = computed(() => {
-//   if (route.meta && route.meta.layout === "main") {
-//     return defineAsyncComponent(() => import("@/layout/MainLayout"));
-//   } else {
-//     return defineAsyncComponent(() => import("@/layout/DefaultLayout"));
-//   }
-// });
+import DefaultLayout from "@/layout/DefaultLayout.vue";
+import MainLayout from "@/layout/MainLayout.vue";
+import { useRoute } from "vue-router";
+import { ref, watch, markRaw } from "vue";
+
+const route = useRoute();
+const Layout = ref();
+watch(
+  () => route.meta?.layout || "default",
+  (metaLayout) => {
+    metaLayout === "main"
+      ? (Layout.value = markRaw(MainLayout))
+      : (Layout.value = markRaw(DefaultLayout));
+  },
+  { immediate: true }
+);
 </script>
 
 <!--<style scoped>-->
