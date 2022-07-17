@@ -1,5 +1,4 @@
-## demo: https://todos-y.herokuapp.com/todo
-
+## demo: https://todos-y.herokuapp.com
 
 ## Project Setup
 
