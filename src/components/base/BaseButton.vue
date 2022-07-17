@@ -1,7 +1,7 @@
 <template>
   <button class="btn" :class="{ fullWidth: fullWidth }" v-bind="$attrs">
     <template v-if="!loading">
-      <slot>Ok</slot>
+      <slot></slot>
     </template>
     <template v-else>Submitting...</template>
   </button>
@@ -28,7 +28,7 @@ const height = computed(() => props.height + "px");
   line-height: 19px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  padding: 5px 28px;
+  padding: 5px calc(v-bind(height) / 2);
   display: flex;
   justify-content: center;
   align-items: center;

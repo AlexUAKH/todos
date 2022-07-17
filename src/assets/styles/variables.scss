@@ -8,8 +8,8 @@ $input-focus-border: #101010;
 $input-border: #9a9a9a;
 $input-error-border: $error;
 
-$color-background: $white;
-$footer-background: $light-gray;
+$color-background: #fafafa;
+$footer-background: $dark;
 $header-gradient-1: #00a9e7;
 $header-gradient-2: #005b9f;
 $color-text: $dark;
@@ -17,6 +17,7 @@ $color-text: $dark;
 $sm: 480px;
 $md: 768px;
 $lg: 1024px;
+$xl: 1401px;
 
 // xs 320px — 480px: Mobile devices.
 // sm 481px — 768px: iPads, Tablets.

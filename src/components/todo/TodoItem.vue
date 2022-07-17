@@ -1,20 +1,20 @@
 <template>
   <div class="todo__item item">
-    <BaseCheckbox v-model:checked="done" :size="20" />
+    <BaseCheckbox v-model:checked="done" :size="20" class="item__checkbox" />
     <div
       v-show="!editing"
       class="item__task"
       :class="{ done }"
       @click="toggleEditing"
+      ref="container"
     >
       {{ todo.task }}
     </div>
-    <input
+    <textarea
       v-show="editing"
       ref="input"
-      type="text"
       v-model="task"
-      class="item__task"
+      class="item__textarea"
       @keyup.enter="() => input.blur()"
       @focusout="toggleEditing"
     />
@@ -43,6 +43,7 @@ const done = ref(props.todo.done);
 const editing = ref(false);
 const task = ref(props.todo.task);
 const input = ref(null);
+const container = ref(null);
 
 const toggleEditing = () => {
   editing.value = !editing.value;
@@ -51,8 +52,11 @@ watch(editing, (val) => {
   if (!val) {
     emit("edit", { ...props.todo, task });
   } else {
+    const currentHeight = container.value.clientHeight;
     nextTick(() => {
       input.value.focus();
+      // input.value.style.height = `${currentHeight}px`;
+      input.value.rows = Math.floor(currentHeight / 25.6);
     });
   }
 });
@@ -69,6 +73,7 @@ watch(done, () => {
   border: 1px solid $light-gray;
   border-radius: 10px;
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   &:nth-child(n) {
     background-color: #f0fff0;
@@ -76,19 +81,25 @@ watch(done, () => {
   &:nth-child(2n) {
     background-color: #e6e6fa;
   }
+  &__checkbox {
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
   &__task {
     flex: 1 1 auto;
-    margin: 0 1rem;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 5px 10px;
     &.done {
       text-decoration: line-through;
     }
-    & + input {
-      width: 100%;
-      height: 30px;
-      border-radius: 5px;
-      padding: 2px 5px;
-      font-size: 16px;
-    }
+  }
+  &__textarea {
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 16px;
+    line-height: 1.6;
+    resize: none;
   }
   &__edit-icon {
     margin: 0 10px;

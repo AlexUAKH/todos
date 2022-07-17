@@ -59,7 +59,7 @@ const links = [
   &__links {
     display: flex;
     flex-wrap: wrap;
-
+    list-style: none;
     & li:not(:last-child) {
       margin-right: 20px;
     }

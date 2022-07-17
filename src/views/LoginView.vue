@@ -76,7 +76,7 @@ import LoginForm from "@/components/LoginForm.vue";
     margin-top: 20px;
   }
   &__login {
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
   }
   &__text {
     &_bold {

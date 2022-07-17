@@ -2,10 +2,11 @@
   <div class="card">
     <div class="card__content">
       <div v-if="error" class="card__error">Name or password are incorrect</div>
-      <form @submit.prevent="submit" class="card__form" autocomplete="off">
+      <form @submit.prevent="submit" class="card__form">
         <BaseInput
           label="Name"
           type="text"
+          :height="53"
           v-model="form.name.value"
           :invalid="!form.name.valid && form.name.touched"
           @blur="form.name.setTouched()"
@@ -14,6 +15,7 @@
         <BaseInput
           label="Password"
           type="password"
+          :height="53"
           v-model="form.password.value"
           :invalid="!form.password.valid && form.password.touched"
           @blur="form.password.setTouched()"
@@ -23,7 +25,7 @@
           :height="53"
           fullWidth
           :loading="loading"
-          :disabled="loading || !valid"
+          :disabled="loading || !form.valid"
         >
           Login
         </BaseButton>
@@ -41,7 +43,7 @@ import BaseInput from "@/components/base/BaseInput.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import { useForm } from "@/hooks/form";
 import { minLength, required } from "@/helpers/validators";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 const error = ref(false);
@@ -58,18 +60,17 @@ const form = useForm({
 });
 const router = useRouter();
 
-const valid = computed(() => {
-  return Object.values(form).every((control) => control.valid);
-});
-
 const submit = () => {
-  if (valid.value) {
+  if (form.valid) {
     error.value = false;
     loading.value = true;
+    const name = form.name.value;
+    const password = form.password.value;
     setTimeout(() => {
-      if (form.name.value === "Admin" && form.password.value === "12345") {
-        console.log("success");
+      if ((name === "Admin" || name === "Eagle") && password === "12345") {
         loading.value = false;
+        localStorage.setItem("authorized", "true");
+        localStorage.setItem("user", name);
         router.push("/todo");
       } else {
         error.value = true;
@@ -85,6 +86,7 @@ const submit = () => {
 
 .card {
   max-width: 480px;
+  background: $white;
   box-shadow: 2px 2px 15px 2px rgba(0, 0, 0, 0.1);
   &__error {
     color: $error;
@@ -92,16 +94,14 @@ const submit = () => {
     text-align: center;
   }
   &__content {
-    padding: 30px 30px 25px;
+    padding: 1rem 1rem 15px;
   }
-
   &__form {
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    margin-bottom: 20px;
+    gap: 15px;
+    margin-bottom: 15px;
   }
-
   &__link {
     display: block;
     text-align: center;
@@ -111,21 +111,32 @@ const submit = () => {
     line-height: 1.15;
     color: #056dae;
   }
-
   &__footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 63px;
-    background-color: $footer-background;
+    height: 50px;
+    background-color: $light-gray;
     color: $dark;
     font-style: normal;
     font-weight: 400;
-    font-size: 25px;
+    font-size: 22px;
     line-height: 1.2;
-
     & a {
       color: inherit;
+    }
+  }
+  @media (min-width: $md) {
+    &__content {
+      padding: 30px 30px 25px;
+    }
+    &__form {
+      gap: 40px;
+      margin-bottom: 20px;
+    }
+    &__footer {
+      height: 63px;
+      font-size: 25px;
     }
   }
 }

@@ -1,12 +1,13 @@
 <template>
   <div class="control" :class="{ invalid: invalid }">
-    <label class="control__label">{{ label }}</label>
+    <label v-if="label" class="control__label">{{ label }}</label>
     <input
       class="control__input"
       v-bind="$attrs"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       autocomplete=""
+      :style="style"
     />
     <div v-if="invalid && error" class="control__hint">
       {{ error }}
@@ -19,7 +20,8 @@ import { computed } from "vue";
 
 const props = defineProps({
   modelValue: { type: String },
-  label: { type: String, required: true },
+  label: { type: String },
+  height: { type: Number, default: 40 },
   invalid: { type: Boolean, default: false },
   errors: { type: Object, default: () => {} }
 });
@@ -30,6 +32,11 @@ const error = computed(() =>
     .filter((el) => el !== "")
     .join(" and ")
 );
+const style = computed(() => {
+  return {
+    height: `${props.height}px`
+  };
+});
 </script>
 
 <style lang="scss" scoped>
@@ -38,6 +45,7 @@ const error = computed(() =>
 .control {
   display: flex;
   flex-direction: column;
+  width: 100%;
   &__label {
     font-style: normal;
     font-weight: 300;
@@ -48,7 +56,6 @@ const error = computed(() =>
     color: $dark;
   }
   &__input {
-    height: 53px;
     padding: 5px 10px;
     font-size: 1.3rem;
     border: 1px solid $input-border;

@@ -20,21 +20,46 @@
     content: "";
     position: absolute;
     width: 100%;
-    height: 797px;
+    height: 350px;
     top: 0;
     left: 0;
     z-index: -1;
     background: linear-gradient($header-gradient-1, $header-gradient-2);
   }
+  @media (min-width: $md) {
+    &:before {
+      height: 550px;
+    }
+  }
+  @media (min-width: $xl) {
+    &:before {
+      height: 797px;
+    }
+  }
 }
 .header {
-  height: 250px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+
   &__logo {
-    width: 186px;
-    height: 119px;
+    width: 80px;
+    height: 51px;
+  }
+  @media (min-width: $lg) {
+    height: 200px;
+    &__logo {
+      width: 150px;
+      height: 96px;
+    }
+  }
+  @media (min-width: $xl) {
+    height: 250px;
+    &__logo {
+      width: 186px;
+      height: 119px;
+    }
   }
 }
 </style>
