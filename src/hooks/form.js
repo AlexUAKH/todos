@@ -1,4 +1,4 @@
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
 import { useControl } from "@/hooks/control";
 
 export const useForm = (formControls = {}) => {
@@ -7,5 +7,10 @@ export const useForm = (formControls = {}) => {
     form[key] = useControl(value);
   });
 
+  form["valid"] = computed(() => {
+    return Object.keys(form)
+      .filter((key) => key !== "valid")
+      .every((key) => form[key].valid);
+  });
   return form;
 };
