@@ -11,6 +11,7 @@
       @done="handleDone"
     />
     <div v-else>Don't find any todos.</div>
+    <div class="todo__hint">** Ctrl + Enter to save Enter to next line</div>
     <BaseButton
       v-if="todos.length"
       class="todo__remove-btn"
@@ -42,10 +43,13 @@ const createTodo = (task) => {
     task,
     done: false
   };
-  todos.push(newTodo);
+  todos.unshift(newTodo);
 };
 const deleteTodo = (todo) => {
-  todos.splice(todos.indexOf(todo), 1);
+  const confirm = window.confirm("Tasks will be deleted. Confirm?");
+  if (confirm) {
+    todos.splice(todos.indexOf(todo), 1);
+  }
 };
 const editTodo = (todo) => {
   const index = todos.findIndex((el) => el.id === todo.id);
@@ -56,9 +60,14 @@ const handleDone = (id) => {
   todos[index].done = !todos[index].done;
 };
 const deleteCompleted = () => {
-  completedTasks.value.forEach((todo) => {
-    deleteTodo(todo);
-  });
+  const confirm = window.confirm(
+    "All completed tasks will be deleted. Confirm?"
+  );
+  if (confirm) {
+    completedTasks.value.forEach((todo) => {
+      deleteTodo(todo);
+    });
+  }
 };
 const completedTasks = computed(() => {
   const completed = todos.filter((todo) => todo.done);
@@ -85,6 +94,13 @@ watch(todos, () => {
   &__create {
     margin-bottom: 10px;
   }
+  &__hint {
+    display: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    opacity: 0.5;
+    margin-top: 0.6rem;
+  }
   &__remove-btn {
     margin: 20px 0 0 auto;
   }
@@ -92,6 +108,9 @@ watch(todos, () => {
     box-shadow: 2px 2px 15px 2px rgba(0, 0, 0, 0.1);
     &__title {
       font-size: 2.5rem;
+    }
+    &__hint {
+      display: block;
     }
   }
 }

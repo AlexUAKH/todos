@@ -15,8 +15,9 @@
       ref="input"
       v-model="task"
       class="item__textarea"
-      @keyup.enter="() => input.blur()"
       @focusout="toggleEditing"
+      @keydown.prevent.ctrl.enter.exact="() => input.blur()"
+      @keydown.prevent.enter.exact="newLine"
     />
     <div
       class="item__edit-icon"
@@ -48,6 +49,12 @@ const container = ref(null);
 const toggleEditing = () => {
   editing.value = !editing.value;
 };
+const newLine = (e) => {
+  let caret = e.target.selectionStart;
+  e.target.setRangeText("\n", caret, caret, "end");
+  task.value = e.target.value;
+  input.value.rows = input.value.rows + 1;
+};
 watch(editing, (val) => {
   if (!val) {
     emit("edit", { ...props.todo, task });
@@ -68,8 +75,8 @@ watch(done, () => {
 <style lang="scss" scoped>
 @import "@/assets/styles/variables.scss";
 .item {
-  padding: 15px;
-  min-height: 60px;
+  padding: 10px;
+  min-height: 50px;
   border: 1px solid $light-gray;
   border-radius: 10px;
   display: flex;
@@ -83,22 +90,24 @@ watch(done, () => {
   }
   &__checkbox {
     flex-shrink: 0;
-    margin-right: 10px;
+    margin-right: 0.25rem;
+  }
+  &__task,
+  &__textarea {
+    font-size: 16px;
+    line-height: 1.6;
   }
   &__task {
     flex: 1 1 auto;
-    font-size: 16px;
-    line-height: 1.6;
-    padding: 5px 10px;
+    padding: 5px 7px;
+    white-space: pre-wrap;
     &.done {
       text-decoration: line-through;
     }
   }
   &__textarea {
     border-radius: 5px;
-    padding: 5px 10px;
-    font-size: 16px;
-    line-height: 1.6;
+    padding: 5px 7px;
     resize: none;
   }
   &__edit-icon {
@@ -111,6 +120,23 @@ watch(done, () => {
   }
   &__delete-icon {
     flex: 0 0 auto;
+  }
+  @media (min-width: $md) {
+    padding: 15px;
+    min-height: 60px;
+    &__checkbox {
+      margin-right: 10px;
+    }
+    &__task {
+      padding: 5px 10px;
+    }
+    &__textarea {
+      padding: 5px 10px;
+    }
+    &__edit-icon {
+      margin: 0 10px;
+      opacity: 0.3;
+    }
   }
 }
 </style>
