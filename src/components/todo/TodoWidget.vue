@@ -37,7 +37,7 @@ onMounted(() => {
   }
 });
 const createTodo = (task) => {
-  const id = todos.length ? todos[todos.length - 1].id + 1 : 10;
+  const id = todos.length ? todos[0].id + 1 : 10;
   const newTodo = {
     id,
     task,
@@ -46,10 +46,7 @@ const createTodo = (task) => {
   todos.unshift(newTodo);
 };
 const deleteTodo = (todo) => {
-  const confirm = window.confirm("Tasks will be deleted. Confirm?");
-  if (confirm) {
-    todos.splice(todos.indexOf(todo), 1);
-  }
+  todos.splice(todos.indexOf(todo), 1);
 };
 const editTodo = (todo) => {
   const index = todos.findIndex((el) => el.id === todo.id);
@@ -73,10 +70,14 @@ const completedTasks = computed(() => {
   const completed = todos.filter((todo) => todo.done);
   return completed.length ? completed : [];
 });
-watch(todos, () => {
-  localStorage.removeItem("todos");
-  localStorage.setItem("todos", JSON.stringify(todos));
-});
+watch(
+  todos,
+  () => {
+    localStorage.removeItem("todos");
+    localStorage.setItem("todos", JSON.stringify(todos));
+  },
+  { deep: true }
+);
 </script>
 
 <style lang="scss" scoped>
