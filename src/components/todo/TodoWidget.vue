@@ -11,7 +11,6 @@
       @done="handleDone"
     />
     <div v-else>Don't find any todos.</div>
-    <div class="todo__hint">** Ctrl + Enter to save Enter to next line</div>
     <BaseButton
       v-if="todos.length"
       class="todo__remove-btn"
@@ -95,13 +94,6 @@ watch(
   &__create {
     margin-bottom: 10px;
   }
-  &__hint {
-    display: none;
-    font-size: 0.8rem;
-    font-weight: 700;
-    opacity: 0.5;
-    margin-top: 0.6rem;
-  }
   &__remove-btn {
     margin: 20px 0 0 auto;
   }
@@ -109,9 +101,6 @@ watch(
     box-shadow: 2px 2px 15px 2px rgba(0, 0, 0, 0.1);
     &__title {
       font-size: 2.5rem;
-    }
-    &__hint {
-      display: block;
     }
   }
 }

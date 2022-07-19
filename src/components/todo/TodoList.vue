@@ -8,6 +8,7 @@
       @remove="$emit('remove', $event)"
       @done="$emit('done', $event)"
     />
+    <div class="todo__hint">** Ctrl + Enter to save, Enter to next line</div>
   </div>
 </template>
 
@@ -18,9 +19,25 @@ defineEmits(["edit", "remove", "done"]);
 </script>
 
 <style lang="scss" scoped>
-.todo__list {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+@import "@/assets/styles/variables.scss";
+
+.todo {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  &__hint {
+    display: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    opacity: 0.5;
+    margin-top: 0.6rem;
+  }
+  @media (min-width: $md) {
+    &__hint {
+      display: block;
+    }
+  }
 }
 </style>
