@@ -2,42 +2,42 @@
   <main class="main">
     <div class="main__head">
       <div class="_container">
-        <div class="main__title">
-          Welcome to <br />Business Analytics Online
-        </div>
+        <div class="main__title">Welcome to <br />Lorem, ipsum dolor.</div>
       </div>
     </div>
     <div class="_container">
       <div class="main__content">
         <LoginForm class="main__login" />
         <p class="main__text">
-          <span class="main__text_bold">Business Analytics</span> — a new,
-          convenient tool for managing and forecasting your business
-          performance, which will help analyze your own finances and cash flows,
-          visualize your reporting, business processes, KPI's
+          <span class="main__text_bold">Lorem ipsum</span> dolor sit amet
+          consectetur adipisicing elit. Porro enim autem beatae, corporis
+          dignissimos commodi reprehenderit est, deleniti nulla cumque,
+          doloribus exercitationem tenetur a eveniet sint. Est quod assumenda
+          dolorum.
         </p>
         <div class="main__advantages">
           <div class="advantage__item">
             <div class="advantage__title">Interactive Reporting</div>
             <div class="advantage__text">
-              In just a few clicks, you can connect your data from 1C, CRM
-              (Bitrix24, AmoCRM, ZohoCRM), E-commerce (PROM.UA, Rozetka, ebay),
-              Logistic (Nova Poshta), Google Analytics and many more systems
-              that reflect different aspects of business activities.
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti
+              doloribus incidunt alias explicabo. Necessitatibus porro cumque
+              veritatis praesentium, inventore harum quia molestias ullam
+              dolores natus illum facilis doloremque, voluptatem quasi.
             </div>
           </div>
           <div class="advantage__item">
             <div class="advantage__title">Automated data updates</div>
             <div class="advantage__text">
-              The application automatically updates and structures the data in
-              just 60 seconds, saving you time and money.
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni
+              iste corrupti earum repudiandae. Eum, laudantium.
             </div>
           </div>
           <div class="advantage__item">
             <div class="advantage__title">Data Security</div>
             <div class="advantage__text">
-              The Bank guarantees the safety of your personal data, ensuring
-              their integrity and confidentiality.
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis
+              facilis amet illum quas praesentium iusto vel voluptate temporibus
+              aliquam animi.
             </div>
           </div>
         </div>
