@@ -1,4 +1,4 @@
-## demo: https://todos-testove.netlify.app/login
+## demo: https://todos-testove.netlify.app
 
 ## Project Setup
 
